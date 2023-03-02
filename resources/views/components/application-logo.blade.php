@@ -1,0 +1,1 @@
+<img src="{{asset('Logo/rong.jpg')}}" width="100px">
