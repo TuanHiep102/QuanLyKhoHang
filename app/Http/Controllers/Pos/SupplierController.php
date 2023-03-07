@@ -26,8 +26,8 @@ class SupplierController extends Controller
             'mobile_no' => $request->mobile_no,
             'email' => $request->email,
             'address' => $request->address,
-            'create_by' => Auth::user()->id,
-            'create_at' => Carbon::now(),
+            'created_by' => Auth::user()->id,
+            'created_at' => Carbon::now(),
         ]);
         $notification = array(
             'message' => 'Đã thêm mới nhà cung cấp thành công',
@@ -35,4 +35,35 @@ class SupplierController extends Controller
         );
         return redirect()->route('supplier.all')->with($notification);
     }
+
+    public function SupplierEdit($id){
+        $supplier = Supplier::findOrFail($id);
+        return view('backend.supplier.supplier_edit',compact('supplier'));
+    } // End Method 
+
+    public function SupplierUpdate(Request $request){
+        $sullier_id = $request->id;
+        Supplier::findOrFail($sullier_id)->update([
+            'name' => $request->name,
+            'mobile_no' => $request->mobile_no,
+            'email' => $request->email,
+            'address' => $request->address,
+            'update_by' => Auth::user()->id,
+            'updated_at' => Carbon::now(), 
+        ]);
+         $notification = array(
+            'message' => 'Cập nhật thông tin thành công', 
+            'alert-type' => 'success'
+        );
+        return redirect()->route('supplier.all')->with($notification);
+    } // End Method 
+
+    public function SupplierDelete($id){
+      Supplier::findOrFail($id)->delete();
+       $notification = array(
+            'message' => 'Đã xóa nhà cung cấp', 
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    } // End Method 
 }

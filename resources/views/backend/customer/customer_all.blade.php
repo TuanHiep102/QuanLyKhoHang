@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Danh sách nhà cung cấp</h4>
+                        <h4 class="mb-sm-0">Danh sách khách hàng</h4>
                     </div>
                 </div>
             </div>
@@ -15,33 +15,32 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{ route('supplier.add') }}"
-                                class="btn btn-dark btn-rounded waves-effect waves-light" style="float:right;">Thêm mới</a>
-                            <br> <br>
-                            <h4 class="card-title">Danh sách thông tin nhà cung cấp </h4>
+                            <a href="{{ route('customer.add') }}" class="btn btn-dark btn-rounded waves-effect waves-light"
+                                style="float:right;">Thêm mới </a> <br> <br>
+                            <h4 class="card-title">Chi tiết danh sách khách hàng</h4>
                             <table id="datatable" class="table table-bordered dt-responsive nowrap"
                                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th>Sl</th>
+                                        <th>STT</th>
                                         <th>Name</th>
-                                        <th>Mobile Number </th>
+                                        <th>Avt</th>
                                         <th>Email</th>
-                                        <th>Address</th>
+                                        <th>Địa chỉ</th>
                                         <th>Action</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($suppliers as $key => $item)
+                                    @foreach ($customers as $key => $item)
                                         <tr>
                                             <td> {{ $key + 1 }} </td>
                                             <td> {{ $item->name }} </td>
-                                            <td> {{ $item->mobile_no }} </td>
+                                            <td> <img src="{{ asset($item->customer_image) }}"
+                                                    style="width:60px; height:50px"> </td>
                                             <td> {{ $item->email }} </td>
                                             <td> {{ $item->address }} </td>
                                             <td>
-                                                <a href="{{ route('supplier.edit',$item->id) }}" class="btn btn-info sm" title="Edit Data">  <i class="fas fa-edit"></i> </a>
                                                 <a href="{{ route('supplier.delete',$item->id) }}" class="btn btn-danger sm" title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a>
-                                                </a>
+                                                <a href="{{ route('customer.delete',$item->id) }}" class="btn btn-danger sm" title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a>
                                             </td>
                                         </tr>
                                     @endforeach
