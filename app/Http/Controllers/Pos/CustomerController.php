@@ -20,26 +20,94 @@ class CustomerController extends Controller
     {
         return view('backend.customer.customer_add');
     }
-    public function CustomerStore(Request $request){
-
+    public function CustomerStore(Request $request)
+    {
         $image = $request->file('customer_image');
-        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension(); // 343434.png
-        Image::make($image)->resize(200,200)->save('upload/customer/'.$name_gen);
-        $save_url = 'upload/customer/'.$name_gen;
+        $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension(); // 343434.png
+        Image::make($image)
+            ->resize(200, 200)
+            ->save('upload/customer/' . $name_gen);
+        $save_url = 'upload/customer/' . $name_gen;
         Customer::insert([
             'name' => $request->name,
             'mobile_no' => $request->mobile_no,
             'email' => $request->email,
             'address' => $request->address,
-            'customer_image' => $save_url ,
+            'customer_image' => $save_url,
             'created_by' => Auth::user()->id,
             'created_at' => Carbon::now(),
         ]);
-         $notification = array(
-            'message' => 'Thêm khách hàng thành công', 
-            'alert-type' => 'success'
-        );
-        return redirect()->route('customer.all')->with($notification);
+        $notification = [
+            'message' => 'Thêm khách hàng thành công',
+            'alert-type' => 'success',
+        ];
+        return redirect()
+            ->route('customer.all')
+            ->with($notification);
+    } // End Method
 
+    public function CustomerEdit($id)
+    {
+        $customer = Customer::findOrFail($id);
+        return view('backend.customer.customer_edit', compact('customer'));
+    } // End Method
+    public function CustomerUpdate(Request $request)
+    {
+        $customer_id = $request->id;
+        if ($request->file('customer_image')) {
+            $image = $request->file('customer_image');
+            $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension(); // 343434.png
+            Image::make($image)
+                ->resize(200, 200)
+                ->save('upload/customer/' . $name_gen);
+            $save_url = 'upload/customer/' . $name_gen;
+            Customer::findOrFail($customer_id)->update([
+                'name' => $request->name,
+                'mobile_no' => $request->mobile_no,
+                'email' => $request->email,
+                'address' => $request->address,
+                'customer_image' => $save_url,
+                'update_by' => Auth::user()->id,
+                'updated_at' => Carbon::now(),
+            ]);
+            $notification = [
+                'message' => 'Cập nhật thông tin khách hàng thành công',
+                'alert-type' => 'success',
+            ];
+            return redirect()
+                ->route('customer.all')
+                ->with($notification);
+        } else {
+            Customer::findOrFail($customer_id)->update([
+                'name' => $request->name,
+                'mobile_no' => $request->mobile_no,
+                'email' => $request->email,
+                'address' => $request->address,
+                'update_by' => Auth::user()->id,
+                'updated_at' => Carbon::now(),
+            ]);
+            $notification = [
+                'message' => 'Cập nhật thông tin và hình ảnh thành công',
+                'alert-type' => 'success',
+            ];
+            return redirect()
+                ->route('customer.all')
+                ->with($notification);
+        } // end else
+    } // End Method
+
+    public function CustomerDelete($id)
+    {
+        $customers = Customer::findOrFail($id);
+        $img = $customers->customer_image;
+        unlink($img);
+        Customer::findOrFail($id)->delete();
+        $notification = [
+            'message' => 'Xóa khách hàng thành công',
+            'alert-type' => 'success',
+        ];
+        return redirect()
+            ->back()
+            ->with($notification);
     } // End Method
 }

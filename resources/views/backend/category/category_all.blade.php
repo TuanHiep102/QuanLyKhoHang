@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Danh sách khách hàng</h4>
+                        <h4 class="mb-sm-0">Danh mục</h4>
                     </div>
                 </div>
             </div>
@@ -15,32 +15,28 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{ route('customer.add') }}" class="btn btn-dark btn-rounded waves-effect waves-light"
-                                style="float:right;">Thêm mới </a> <br> <br>
-                            <h4 class="card-title">Chi tiết danh sách khách hàng</h4>
+                            <a href="{{ route('category.add') }}" class="btn btn-dark btn-rounded waves-effect waves-light"
+                                style="float:right;">Thêm mới</a> <br> <br>
+                            <h4 class="card-title">Danh sách danh mục</h4>
                             <table id="datatable" class="table table-bordered dt-responsive nowrap"
                                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th>STT</th>
+                                        <th width="5%">Sl</th>
                                         <th>Name</th>
-                                        <th>Avt</th>
-                                        <th>Email</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Action</th>
+                                        <th width="20%">Action</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($customers as $key => $item)
+                                    @foreach ($categoris as $key => $item)
                                         <tr>
                                             <td> {{ $key + 1 }} </td>
                                             <td> {{ $item->name }} </td>
-                                            <td> <img src="{{ asset($item->customer_image) }}"
-                                                    style="width:60px; height:50px"> </td>
-                                            <td> {{ $item->email }} </td>
-                                            <td> {{ $item->address }} </td>
                                             <td>
-                                                <a href="{{ route('customer.edit',$item->id) }}" class="btn btn-info sm" title="Edit Data">  <i class="fas fa-edit"></i> </a>
-                                                <a href="{{ route('customer.delete',$item->id) }}" class="btn btn-danger sm" title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a>
+                                                <a href="{{ route('unit.edit', $item->id) }}" class="btn btn-info sm"
+                                                    title="Edit Data"> <i class="fas fa-edit"></i> </a>
+                                                <a href="{{ route('unit.delete', $item->id) }}" class="btn btn-danger sm"
+                                                    title="Delete Data" id="delete"> <i class="fas fa-trash-alt"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
