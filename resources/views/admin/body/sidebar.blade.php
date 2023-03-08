@@ -33,20 +33,28 @@
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="ri-mail-send-line"></i>
-                                    <span>Manage Units</span>
+                                    <span>Đơn vị</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ route('unit.all') }}">All Unit</a></li>
+                                    <li><a href="{{ route('unit.all') }}">Danh sách đơn vị</a></li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="ri-mail-send-line"></i>
-                                    <span>Manage Category</span>
+                                    <span>Danh mục</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ route('category.all') }}">All Category</a></li>
-                    
+                                    <li><a href="{{ route('category.all') }}">Danh sách danh mục</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="ri-mail-send-line"></i>
+                                    <span>Sản phẩm</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="{{ route('product.all') }}">Danh sách sản phẩm</a></li>
                                 </ul>
                             </li>
                             <li class="menu-title">Pages</li>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2023 at 11:29 AM
+-- Generation Time: Mar 08, 2023 at 11:10 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -36,6 +36,16 @@ CREATE TABLE `categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(2, 'Điện Thoại Di Động', 1, 1, 1, '2023-03-07 20:16:23', '2023-03-07 20:16:30'),
+(3, 'Đồng Hồ', 1, 1, NULL, '2023-03-07 20:16:56', NULL),
+(4, 'Loa', 1, 1, NULL, '2023-03-07 20:17:04', NULL),
+(5, 'Máy Tính Bảng', 1, 1, NULL, '2023-03-07 20:17:17', NULL);
 
 -- --------------------------------------------------------
 
@@ -105,7 +115,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2023_03_06_063419_create_suppliers_table', 1),
 (17, '2023_03_07_022735_create_customers_table', 1),
 (18, '2023_03_07_085229_create_units_table', 2),
-(19, '2023_03_07_093654_create_categories_table', 3);
+(19, '2023_03_07_093654_create_categories_table', 3),
+(20, '2023_03_08_023821_create_products_table', 4);
 
 -- --------------------------------------------------------
 
@@ -140,6 +151,36 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `supplier_id` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `quantity` double NOT NULL DEFAULT 0,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `supplier_id`, `unit_id`, `category_id`, `name`, `quantity`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(1, 3, 3, 2, 'Nguyễn Tuấn Hiệp', 0, 1, 1, NULL, '2023-03-07 20:53:48', NULL),
+(2, 3, 3, 2, 'Iphone 13 ProMax', 0, 1, 1, NULL, '2023-03-08 00:08:42', NULL),
+(3, 3, 3, 2, 'Iphone 14 ProMax', 0, 1, 1, NULL, '2023-03-08 00:09:19', NULL),
+(4, 4, 3, 5, 'Samsung A232', 0, 1, 1, 1, '2023-03-08 00:09:31', '2023-03-08 00:57:09');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `suppliers`
 --
 
@@ -157,6 +198,15 @@ CREATE TABLE `suppliers` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `suppliers`
+--
+
+INSERT INTO `suppliers` (`id`, `name`, `customer_image`, `mobile_no`, `email`, `address`, `status`, `created_by`, `update_by`, `created_at`, `updated_at`) VALUES
+(3, 'Apple', NULL, '0338800449', 'apple@youngboycodon.com', 'Hà Nội', 1, 1, NULL, '2023-03-07 20:11:56', NULL),
+(4, 'Samsung', NULL, '12467823452', 'samsung@youngboycodon.com', 'Nam Định', 1, 1, NULL, '2023-03-07 20:12:13', NULL),
+(5, 'Oppo', NULL, '03388004432', 'oppo@youngboycodon.com', 'Thái Bình', 1, 1, NULL, '2023-03-07 20:12:38', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -172,6 +222,16 @@ CREATE TABLE `units` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `units`
+--
+
+INSERT INTO `units` (`id`, `name`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(3, 'Chiếc', 1, 1, NULL, '2023-03-07 20:12:53', NULL),
+(4, 'Lô', 1, 1, NULL, '2023-03-07 20:12:59', NULL),
+(5, 'Thùng', 1, 1, NULL, '2023-03-07 20:13:07', NULL),
+(6, 'Kg', 1, 1, NULL, '2023-03-07 20:13:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -242,6 +302,12 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `suppliers`
 --
 ALTER TABLE `suppliers`
@@ -269,7 +335,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -287,7 +353,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -296,16 +362,22 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `units`
 --
 ALTER TABLE `units`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
