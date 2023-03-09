@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2023 at 11:10 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Mar 09, 2023 at 12:16 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
@@ -55,11 +55,11 @@ INSERT INTO `categories` (`id`, `name`, `status`, `created_by`, `updated_by`, `c
 
 CREATE TABLE `customers` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `customer_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mobile_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `customer_image` varchar(255) DEFAULT NULL,
+  `mobile_no` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1,
   `created_by` int(11) DEFAULT NULL,
   `update_by` int(11) DEFAULT NULL,
@@ -83,11 +83,11 @@ INSERT INTO `customers` (`id`, `name`, `customer_image`, `mobile_no`, `email`, `
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -99,7 +99,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -116,7 +116,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2023_03_07_022735_create_customers_table', 1),
 (18, '2023_03_07_085229_create_units_table', 2),
 (19, '2023_03_07_093654_create_categories_table', 3),
-(20, '2023_03_08_023821_create_products_table', 4);
+(20, '2023_03_08_023821_create_products_table', 4),
+(21, '2023_03_08_161810_create_purchases_table', 5);
 
 -- --------------------------------------------------------
 
@@ -125,8 +126,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -138,11 +139,11 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -159,7 +160,7 @@ CREATE TABLE `products` (
   `supplier_id` int(11) NOT NULL,
   `unit_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `quantity` double NOT NULL DEFAULT 0,
   `status` tinyint(4) NOT NULL DEFAULT 1,
   `created_by` int(11) DEFAULT NULL,
@@ -173,10 +174,36 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `supplier_id`, `unit_id`, `category_id`, `name`, `quantity`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 3, 3, 2, 'Nguyễn Tuấn Hiệp', 0, 1, 1, NULL, '2023-03-07 20:53:48', NULL),
 (2, 3, 3, 2, 'Iphone 13 ProMax', 0, 1, 1, NULL, '2023-03-08 00:08:42', NULL),
 (3, 3, 3, 2, 'Iphone 14 ProMax', 0, 1, 1, NULL, '2023-03-08 00:09:19', NULL),
-(4, 4, 3, 5, 'Samsung A232', 0, 1, 1, 1, '2023-03-08 00:09:31', '2023-03-08 00:57:09');
+(4, 4, 3, 5, 'Samsung A232', 0, 1, 1, 1, '2023-03-08 00:09:31', '2023-03-08 00:57:09'),
+(5, 3, 3, 3, 'Apple Watch Series 8 GPS', 0, 1, 1, NULL, '2023-03-08 20:39:19', NULL),
+(6, 3, 3, 3, 'Apple Watch Series 8 GPS 45mm', 0, 1, 1, NULL, '2023-03-08 20:39:42', NULL),
+(7, 3, 3, 4, 'Apple HomePod Mini (Space Gray)', 0, 1, 1, NULL, '2023-03-08 20:40:12', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchases`
+--
+
+CREATE TABLE `purchases` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `supplier_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `purchase_no` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `buying_qty` double NOT NULL,
+  `unit_price` double NOT NULL,
+  `buying_price` double NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=Pending, 1=Approved',
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -186,11 +213,11 @@ INSERT INTO `products` (`id`, `supplier_id`, `unit_id`, `category_id`, `name`, `
 
 CREATE TABLE `suppliers` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `customer_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mobile_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `customer_image` varchar(255) DEFAULT NULL,
+  `mobile_no` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1,
   `created_by` int(11) DEFAULT NULL,
   `update_by` int(11) DEFAULT NULL,
@@ -215,7 +242,7 @@ INSERT INTO `suppliers` (`id`, `name`, `customer_image`, `mobile_no`, `email`, `
 
 CREATE TABLE `units` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1,
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
@@ -241,12 +268,12 @@ INSERT INTO `units` (`id`, `name`, `status`, `created_by`, `updated_by`, `create
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -308,6 +335,12 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `purchases`
+--
+ALTER TABLE `purchases`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `suppliers`
 --
 ALTER TABLE `suppliers`
@@ -353,7 +386,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -365,7 +398,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `purchases`
+--
+ALTER TABLE `purchases`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `suppliers`
