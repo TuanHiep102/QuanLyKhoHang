@@ -64,6 +64,7 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{ route('purchase.all') }}">Mua Hàng</a></li>
+                                    <li><a href="{{ route('purchase.pending') }}">Approval Purchase</a></li>
                                 </ul>
                             </li>
                             <li class="menu-title">Pages</li>

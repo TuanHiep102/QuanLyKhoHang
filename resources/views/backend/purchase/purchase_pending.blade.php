@@ -16,19 +16,19 @@
                     <div class="card">
                         <div class="card-body">
                             <a href="{{ route('purchase.add') }}" class="btn btn-dark btn-rounded waves-effect waves-light"
-                                style="float:right;">Add Purchase </a> <br> <br>
-                            <h4 class="card-title">Purchase All Data </h4>
+                                style="float:right;"> Purchase Pending </a> <br> <br>
+                            <h4 class="card-title">Purchase All Pending Data </h4>
                             <table id="datatable" class="table table-bordered dt-responsive nowrap"
                                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th>STT</th>
+                                        <th>Sl</th>
                                         <th>Purhase No</th>
                                         <th>Date </th>
-                                        <th>Nhà cung cấp</th>
-                                        <th>Danh mục</th>
+                                        <th>Supplier</th>
+                                        <th>Category</th>
                                         <th>Qty</th>
-                                        <th>Tên sản phẩm</th>
+                                        <th>Product Name</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                 </thead>
@@ -51,9 +51,9 @@
                                             </td>
                                             <td>
                                                 @if ($item->status == '0')
-                                                    <a href="{{ route('purchase.delete', $item->id) }}"
-                                                        class="btn btn-danger sm" title="Delete Data" id="delete"> <i
-                                                            class="fas fa-trash-alt"></i> </a>
+                                                    <a href="{{ route('purchase.approve', $item->id) }} "
+                                                        class="btn btn-danger sm" title="Approved" id="ApproveBtn"> <i
+                                                            class="fas fa-check-circle"></i> </a>
                                                 @endif
                                             </td>
                                         </tr>

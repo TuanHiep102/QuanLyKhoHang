@@ -65,7 +65,7 @@
                             </div> <!-- // end row  -->
                         </div> <!-- End card-body -->
                         <div class="card-body">
-                            <form method="" action="">
+                            <form method="post" action="{{ route('purchase.store') }}">
                                 @csrf
                                 <table class="table-sm table-bordered" width="100%" style="border-color: #ddd;">
                                     <thead>
@@ -94,7 +94,7 @@
                                     </tbody>
                                 </table><br>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-info" id="storeButton"> Purchase Store</button>
+                                    <button type="submit" class="btn btn-info" id="storeButton">Purchase Store</button>
                                 </div>
                             </form>
                         </div>

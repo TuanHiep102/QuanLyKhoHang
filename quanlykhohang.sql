@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2023 at 12:16 PM
+-- Generation Time: Mar 09, 2023 at 06:50 PM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -175,9 +175,9 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `supplier_id`, `unit_id`, `category_id`, `name`, `quantity`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (2, 3, 3, 2, 'Iphone 13 ProMax', 0, 1, 1, NULL, '2023-03-08 00:08:42', NULL),
-(3, 3, 3, 2, 'Iphone 14 ProMax', 0, 1, 1, NULL, '2023-03-08 00:09:19', NULL),
+(3, 3, 3, 2, 'Iphone 14 ProMax', 1, 1, 1, NULL, '2023-03-08 00:09:19', '2023-03-09 10:39:32'),
 (4, 4, 3, 5, 'Samsung A232', 0, 1, 1, 1, '2023-03-08 00:09:31', '2023-03-08 00:57:09'),
-(5, 3, 3, 3, 'Apple Watch Series 8 GPS', 0, 1, 1, NULL, '2023-03-08 20:39:19', NULL),
+(5, 3, 3, 3, 'Apple Watch Series 8 GPS', 2, 1, 1, NULL, '2023-03-08 20:39:19', '2023-03-09 10:48:58'),
 (6, 3, 3, 3, 'Apple Watch Series 8 GPS 45mm', 0, 1, 1, NULL, '2023-03-08 20:39:42', NULL),
 (7, 3, 3, 4, 'Apple HomePod Mini (Space Gray)', 0, 1, 1, NULL, '2023-03-08 20:40:12', NULL);
 
@@ -204,6 +204,27 @@ CREATE TABLE `purchases` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `purchases`
+--
+
+INSERT INTO `purchases` (`id`, `supplier_id`, `category_id`, `product_id`, `purchase_no`, `date`, `description`, `buying_qty`, `unit_price`, `buying_price`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(2, 3, 2, 3, '10220', '2023-03-10', NULL, 1, 20000000, 20000000, 1, 1, NULL, '2023-03-09 10:36:09', '2023-03-09 10:39:32'),
+(3, 4, 5, 4, '103101', '2023-03-10', NULL, 1, 15000000, 15000000, 0, 1, NULL, '2023-03-09 10:44:23', '2023-03-09 10:44:23'),
+(4, 3, 3, 6, '103102', '2023-03-11', NULL, 2, 7000000, 14000000, 0, 1, NULL, '2023-03-09 10:44:56', '2023-03-09 10:44:56'),
+(5, 3, 4, 7, '103103', '2023-03-11', NULL, 1, 5000000, 5000000, 0, 1, NULL, '2023-03-09 10:45:40', '2023-03-09 10:45:40'),
+(6, 3, 2, 2, '103184', '2023-03-11', NULL, 1, 23000000, 23000000, 0, 1, NULL, '2023-03-09 10:47:11', '2023-03-09 10:47:11'),
+(7, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 0, 1, NULL, '2023-03-09 10:47:30', '2023-03-09 10:47:30'),
+(8, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 0, 1, NULL, '2023-03-09 10:47:55', '2023-03-09 10:47:55'),
+(9, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 0, 1, NULL, '2023-03-09 10:48:02', '2023-03-09 10:48:02'),
+(10, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 0, 1, NULL, '2023-03-09 10:48:07', '2023-03-09 10:48:07'),
+(11, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 0, 1, NULL, '2023-03-09 10:48:11', '2023-03-09 10:48:11'),
+(12, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 0, 1, NULL, '2023-03-09 10:48:15', '2023-03-09 10:48:15'),
+(13, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 0, 1, NULL, '2023-03-09 10:48:20', '2023-03-09 10:48:20'),
+(14, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 0, 1, NULL, '2023-03-09 10:48:25', '2023-03-09 10:48:25'),
+(15, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 1, 1, NULL, '2023-03-09 10:48:29', '2023-03-09 10:48:58'),
+(17, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 1, 1, NULL, '2023-03-09 10:48:40', '2023-03-09 10:48:48');
 
 -- --------------------------------------------------------
 
@@ -404,7 +425,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `suppliers`
