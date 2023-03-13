@@ -7,18 +7,18 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Add Purchase</h4><br><br>
+                            <h4 class="card-title">Thêm đơn hàng</h4><br><br>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="md-3">
-                                        <label for="example-text-input" class="form-label">Date</label>
+                                        <label for="example-text-input" class="form-label">Ngày</label>
                                         <input class="form-control example-date-input" name="date" type="date"
                                             id="date">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="md-3">
-                                        <label for="example-text-input" class="form-label">Purchase No</label>
+                                        <label for="example-text-input" class="form-label">Mã đơn hàng</label>
                                         <input class="form-control example-date-input" name="purchase_no" type="text"
                                             id="purchase_no">
                                     </div>
@@ -26,8 +26,7 @@
                                 <div class="col-md-4">
                                     <div class="md-3">
                                         <label for="example-text-input" class="form-label">Nhà cung cấp</label>
-                                        <select id="supplier_id" name="supplier_id" class="form-select"
-                                            aria-label="Default select example">
+                                        < <select id="supplier_id" name="supplier_id" class="form-select select2" aria-label="Default select example">
                                             <option value="" disabled selected hidden>Chọn nhà cung cấp</option>
                                             @foreach ($supplier as $supp)
                                                 <option value="{{ $supp->id }}">{{ $supp->name }}</option>
@@ -38,8 +37,7 @@
                                 <div class="col-md-4">
                                     <div class="md-3">
                                         <label for="example-text-input" class="form-label">Danh mục</label>
-                                        <select name="category_id" id="category_id" class="form-select"
-                                            aria-label="Default select example">
+                                        <<select name="category_id" id="category_id" class="form-select select2" aria-label="Default select example">
                                             <option value="" disabled selected hidden>Chọn danh mục</option>
                                         </select>
                                     </div>
@@ -47,8 +45,7 @@
                                 <div class="col-md-4">
                                     <div class="md-3">
                                         <label for="example-text-input" class="form-label">Sản phẩm</label>
-                                        <select name="product_id" id="product_id" class="form-select"
-                                            aria-label="Default select example">
+                                        <select name="product_id" id="product_id" class="form-select select2" aria-label="Default select example">
                                             <option value="" disabled selected hidden>Chọn nhà sản phẩm</option>
                                         </select>
                                     </div>
@@ -59,7 +56,7 @@
                                         </label>
                                         <i
                                             class="btn btn-secondary btn-rounded waves-effect waves-light fas fa-plus-circle addeventmore">
-                                            Add More</i>
+                                            Thêm sản phẩm</i>
                                     </div>
                                 </div>
                             </div> <!-- // end row  -->
@@ -94,7 +91,7 @@
                                     </tbody>
                                 </table><br>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-info" id="storeButton">Purchase Store</button>
+                                    <button type="submit" class="btn btn-info" id="storeButton">Thêm đơn hàng</button>
                                 </div>
                             </form>
                         </div>
@@ -191,35 +188,35 @@
                     var product_id = $('#product_id').val();
                     var product_name = $('#product_id').find('option:selected').text();
                     if (date == '') {
-                        $.notify("Date is Required", {
+                        $.notify("Vui lòng chọn ngày", {
                             globalPosition: 'top right',
                             className: 'error'
                         });
                         return false;
                     }
                     if (purchase_no == '') {
-                        $.notify("Purchase No is Required", {
+                        $.notify("Vui lòng nhập số hóa đơn", {
                             globalPosition: 'top right',
                             className: 'error'
                         });
                         return false;
                     }
                     if (supplier_id == '') {
-                        $.notify("Supplier is Required", {
+                        $.notify("Vui lòng chọn nhà cung cấp", {
                             globalPosition: 'top right',
                             className: 'error'
                         });
                         return false;
                     }
                     if (category_id == '') {
-                        $.notify("Category is Required", {
+                        $.notify("Vui lòng chọn danh mục", {
                             globalPosition: 'top right',
                             className: 'error'
                         });
                         return false;
                     }
                     if (product_id == '') {
-                        $.notify("Product Field is Required", {
+                        $.notify("Vui lòng chọn sản phẩm", {
                             globalPosition: 'top right',
                             className: 'error'
                         });

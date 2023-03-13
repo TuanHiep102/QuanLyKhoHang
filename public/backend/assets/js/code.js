@@ -28,19 +28,19 @@ $(function(){
       e.preventDefault();
       var link = $(this).attr("href");
                 Swal.fire({
-                  title: 'Are you sure?',
-                  text: "Approve This Data?",
+                  title: 'Bạn có chắc chắn?',
+                  text: "Đơn hàng được xác nhận?",
                   icon: 'warning',
                   showCancelButton: true,
                   confirmButtonColor: '#3085d6',
                   cancelButtonColor: '#d33',
-                  confirmButtonText: 'Yes, Approve it!'
+                  confirmButtonText: 'Yes, Xác nhận!'
                 }).then((result) => {
                   if (result.isConfirmed) {
                     window.location.href = link
                     Swal.fire(
                       'Approved!',
-                      'Your file has been Approved.',
+                      'Đơn hàng đã được xác nhận',
                       'success'
                     )
                   }

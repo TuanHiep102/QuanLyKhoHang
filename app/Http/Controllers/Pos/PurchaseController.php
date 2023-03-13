@@ -34,7 +34,7 @@ class PurchaseController extends Controller
     {
         if ($request->category_id == null) {
             $notification = [
-                'message' => 'Sorry you do not select any item',
+                'message' => 'Bạn đang không chọn sản phẩm nào',
                 'alert-type' => 'error',
             ];
             return redirect()
@@ -59,7 +59,7 @@ class PurchaseController extends Controller
             } // end foreach
         } // end else
         $notification = [
-            'message' => 'Data Save Successfully',
+            'message' => 'Dữ liệu đã được lưu',
             'alert-type' => 'success',
         ];
         return redirect()
@@ -71,7 +71,7 @@ class PurchaseController extends Controller
     {
         Purchase::findOrFail($id)->delete();
         $notification = [
-            'message' => 'Purchase Iteam Deleted Successfully',
+            'message' => 'Đơn hàng đã được xóa',
             'alert-type' => 'success',
         ];
         return redirect()
@@ -100,7 +100,7 @@ class PurchaseController extends Controller
             ]);
 
             $notification = [
-                'message' => 'Status Approved Successfully',
+                'message' => 'Đã chuyển sang xác nhận đơn hàng',
                 'alert-type' => 'success',
             ];
             return redirect()

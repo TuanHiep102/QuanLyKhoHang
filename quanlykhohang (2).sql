@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2023 at 06:50 PM
+-- Generation Time: Mar 13, 2023 at 11:31 AM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -94,6 +94,44 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `invoices`
+--
+
+CREATE TABLE `invoices` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `invoice_no` varchar(255) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=Pending, 1=Approved',
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice_details`
+--
+
+CREATE TABLE `invoice_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `date` date DEFAULT NULL,
+  `invoice_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `selling_qty` double DEFAULT NULL,
+  `unit_price` double DEFAULT NULL,
+  `selling_price` double DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -117,7 +155,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (18, '2023_03_07_085229_create_units_table', 2),
 (19, '2023_03_07_093654_create_categories_table', 3),
 (20, '2023_03_08_023821_create_products_table', 4),
-(21, '2023_03_08_161810_create_purchases_table', 5);
+(21, '2023_03_08_161810_create_purchases_table', 5),
+(22, '2023_03_10_093304_create_invoices_table', 6),
+(23, '2023_03_10_093424_create_invoice_details_table', 6),
+(24, '2023_03_13_071504_create_payments_table', 6),
+(25, '2023_03_13_071522_create_payment_details_table', 6);
 
 -- --------------------------------------------------------
 
@@ -129,6 +171,41 @@ CREATE TABLE `password_resets` (
   `email` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `invoice_id` int(11) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `paid_status` varchar(51) DEFAULT NULL,
+  `paid_amount` double DEFAULT NULL,
+  `due_amount` double DEFAULT NULL,
+  `total_amount` double DEFAULT NULL,
+  `discount_amount` double DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_details`
+--
+
+CREATE TABLE `payment_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `invoice_id` int(11) DEFAULT NULL,
+  `current_paid_amount` double DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -177,7 +254,7 @@ INSERT INTO `products` (`id`, `supplier_id`, `unit_id`, `category_id`, `name`, `
 (2, 3, 3, 2, 'Iphone 13 ProMax', 0, 1, 1, NULL, '2023-03-08 00:08:42', NULL),
 (3, 3, 3, 2, 'Iphone 14 ProMax', 1, 1, 1, NULL, '2023-03-08 00:09:19', '2023-03-09 10:39:32'),
 (4, 4, 3, 5, 'Samsung A232', 0, 1, 1, 1, '2023-03-08 00:09:31', '2023-03-08 00:57:09'),
-(5, 3, 3, 3, 'Apple Watch Series 8 GPS', 2, 1, 1, NULL, '2023-03-08 20:39:19', '2023-03-09 10:48:58'),
+(5, 3, 3, 3, 'Apple Watch Series 8 GPS', 3, 1, 1, NULL, '2023-03-08 20:39:19', '2023-03-09 23:37:41'),
 (6, 3, 3, 3, 'Apple Watch Series 8 GPS 45mm', 0, 1, 1, NULL, '2023-03-08 20:39:42', NULL),
 (7, 3, 3, 4, 'Apple HomePod Mini (Space Gray)', 0, 1, 1, NULL, '2023-03-08 20:40:12', NULL);
 
@@ -221,10 +298,11 @@ INSERT INTO `purchases` (`id`, `supplier_id`, `category_id`, `product_id`, `purc
 (10, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 0, 1, NULL, '2023-03-09 10:48:07', '2023-03-09 10:48:07'),
 (11, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 0, 1, NULL, '2023-03-09 10:48:11', '2023-03-09 10:48:11'),
 (12, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 0, 1, NULL, '2023-03-09 10:48:15', '2023-03-09 10:48:15'),
-(13, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 0, 1, NULL, '2023-03-09 10:48:20', '2023-03-09 10:48:20'),
-(14, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 0, 1, NULL, '2023-03-09 10:48:25', '2023-03-09 10:48:25'),
+(14, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 1, 1, NULL, '2023-03-09 10:48:25', '2023-03-09 23:37:41'),
 (15, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 1, 1, NULL, '2023-03-09 10:48:29', '2023-03-09 10:48:58'),
-(17, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 1, 1, NULL, '2023-03-09 10:48:40', '2023-03-09 10:48:48');
+(17, 3, 3, 5, '13312331', '2023-03-15', NULL, 1, 4, 4, 1, 1, NULL, '2023-03-09 10:48:40', '2023-03-09 10:48:48'),
+(18, 4, 5, 4, '103123', '2023-03-11', NULL, 2, 15000, 30000, 0, 1, NULL, '2023-03-09 23:29:35', '2023-03-09 23:29:35'),
+(19, 3, 2, 3, '123', '2023-03-10', NULL, 1, 200000, 200000, 0, 1, NULL, '2023-03-09 23:35:20', '2023-03-09 23:35:20');
 
 -- --------------------------------------------------------
 
@@ -330,6 +408,18 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `invoice_details`
+--
+ALTER TABLE `invoice_details`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -340,6 +430,18 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment_details`
+--
+ALTER TABLE `payment_details`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `personal_access_tokens`
@@ -404,10 +506,34 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `invoices`
+--
+ALTER TABLE `invoices`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `invoice_details`
+--
+ALTER TABLE `invoice_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payment_details`
+--
+ALTER TABLE `payment_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -425,7 +551,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `suppliers`

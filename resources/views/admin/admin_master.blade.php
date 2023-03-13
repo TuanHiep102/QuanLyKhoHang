@@ -31,6 +31,9 @@
     <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+     <!-- Select 2 -->
+    <link href="{{ asset('backend/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
+    <!-- end Select 2  -->
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 
@@ -136,6 +139,10 @@
     <script src="{{ asset('backend/assets/js/code.js') }}"></script>
     <script src="{{ asset('backend/assets/js/handlebars.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" ></script>
+    <!--  For Select2 -->
+    <script src="{{ asset('backend/assets/libs/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/pages/form-advanced.init.js') }}"></script>
+    <!-- end  For Select2 -->
 </body>
 
 </html>

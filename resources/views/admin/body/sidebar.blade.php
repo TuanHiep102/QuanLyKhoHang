@@ -23,7 +23,7 @@
                             </li>
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="ri-caravan-fill"></i>
+                                    <i class=" ri-user-follow-line"></i>
                                     <span>Khách hàng</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
@@ -32,7 +32,7 @@
                             </li>
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="ri-mail-send-line"></i>
+                                    <i class="mdi-unity"></i>
                                     <span>Đơn vị</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
@@ -41,7 +41,7 @@
                             </li>
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="ri-mail-send-line"></i>
+                                    <i class="fas fa-chart-bar"></i>
                                     <span>Danh mục</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
@@ -50,7 +50,7 @@
                             </li>
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="ri-mail-send-line"></i>
+                                    <i class="fas fa-server"></i>
                                     <span>Sản phẩm</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
@@ -59,12 +59,23 @@
                             </li>
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="ri-mail-send-line"></i>
-                                    <span>Mua Hàng</span>
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span>Đơn hàng</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ route('purchase.all') }}">Mua Hàng</a></li>
-                                    <li><a href="{{ route('purchase.pending') }}">Approval Purchase</a></li>
+                                    <li><a href="{{ route('purchase.all') }}">Đơn hàng</a></li>
+                                    <li><a href="{{ route('purchase.pending') }}">Xác nhận đơn hàng</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="ri-mail-send-line"></i>
+                                    <span>Manage Invoice</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="{{ route('invoice.all') }}">All Invoice</a></li>
+                                    <li><a href=" ">Approval Invoice</a></li>
+                    
                                 </ul>
                             </li>
                             <li class="menu-title">Pages</li>

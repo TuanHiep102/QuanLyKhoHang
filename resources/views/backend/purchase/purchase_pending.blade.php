@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Purchase All</h4>
+                        <h4 class="mb-sm-0">Danh sách đơn hàng</h4>
                     </div>
                 </div>
             </div>
@@ -15,21 +15,20 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{ route('purchase.add') }}" class="btn btn-dark btn-rounded waves-effect waves-light"
-                                style="float:right;"> Purchase Pending </a> <br> <br>
-                            <h4 class="card-title">Purchase All Pending Data </h4>
+                            <a href="{{ route('purchase.add') }}" class="btn btn-dark btn-rounded waves-effect waves-light" style="float:right;"><i class="fas fa-plus-circle">  Đơn hàng chờ xác nhận </i></a> <br>  <br>
+                            <h4 class="card-title">Danh sách đơn hàng chờ</h4>
                             <table id="datatable" class="table table-bordered dt-responsive nowrap"
                                 style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>
                                         <th>Sl</th>
-                                        <th>Purhase No</th>
-                                        <th>Date </th>
-                                        <th>Supplier</th>
-                                        <th>Category</th>
-                                        <th>Qty</th>
-                                        <th>Product Name</th>
-                                        <th>Status</th>
+                                        <th>Mã đơn hàng</th>
+                                        <th>Ngày </th>
+                                        <th>Nhà cung cấp</th>
+                                        <th>Danh mục</th>
+                                        <th>Số lượng</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Trạng thái</th>
                                         <th>Action</th>
                                 </thead>
                                 <tbody>
@@ -44,9 +43,9 @@
                                             <td> {{ $item['product']['name'] }} </td>
                                             <td>
                                                 @if ($item->status == '0')
-                                                    <span class="btn btn-warning">Pending</span>
+                                                    <span class="btn btn-warning">Đang chờ</span>
                                                 @elseif($item->status == '1')
-                                                    <span class="btn btn-success">Approved</span>
+                                                    <span class="btn btn-success">Xác nhận</span>
                                                 @endif
                                             </td>
                                             <td>
