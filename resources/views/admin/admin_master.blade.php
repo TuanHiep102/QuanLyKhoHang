@@ -34,7 +34,7 @@
      <!-- Select 2 -->
     <link href="{{ asset('backend/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
     <!-- end Select 2  -->
-
+    
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 
 </head>
@@ -142,6 +142,8 @@
     <!--  For Select2 -->
     <script src="{{ asset('backend/assets/libs/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('backend/assets/js/pages/form-advanced.init.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/autoNumeric.min.js') }}"></script>
+    
     <!-- end  For Select2 -->
 </body>
 

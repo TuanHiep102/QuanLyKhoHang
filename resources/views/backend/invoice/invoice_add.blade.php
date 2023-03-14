@@ -7,44 +7,47 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Thêm hóa đơn </h4><br><br>
+                            <h4 class="card-title">Thêm hóa đơn</h4><br><br>
                             <div class="row">
                                 <div class="col-md-1">
                                     <div class="md-3">
-                                        <label for="example-text-input" class="form-label">Inv No</label>
-                                        <input class="form-control example-date-input" name="invoice_no" type="text" value="{{ $invoice_no }}"  id="invoice_no" readonly style="background-color:#ddd" >
+                                        <label for="example-text-input" class="form-label">Mã hóa đơn</label>
+                                        <input class="form-control example-date-input" name="invoice_no" type="text"
+                                            value="{{ $invoice_no }}" id="invoice_no" readonly
+                                            style="background-color:#ddd">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="md-3">
                                         <label for="example-text-input" class="form-label">Ngày</label>
-                                        <input class="form-control example-date-input" value="{{ $date }}" name="date" type="date"  id="date">
+                                        <input class="form-control example-date-input" value="{{ $date }}"
+                                            name="date" type="date" id="date">
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="md-3">
                                         <label for="example-text-input" class="form-label">Tên danh mục</label>
                                         <select name="category_id" id="category_id" class="form-select select2"
                                             aria-label="Default select example">
-                                            <option value="" disabled selected hidden>Chọn tên danh mục</option>
+                                            <option value="0" disabled selected hidden>Chọn danh mục</option>
                                             @foreach ($category as $cat)
                                                 <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="md-3">
                                         <label for="example-text-input" class="form-label">Tên sản phẩm</label>
                                         <select name="product_id" id="product_id" class="form-select select2"
                                             aria-label="Default select example">
-                                            <option value="" disabled selected hidden>Chọn Tên sản phẩm</option>
+                                            <option value="" disabled selected hidden>Chọn sản phẩm</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <div class="md-3">
-                                        <label for="example-text-input" class="form-label">Tồn kho(Đơn chiếc/Kg)</label>
+                                        <label for="example-text-input" class="form-label">Tồn kho(Cái/Kg)</label>
                                         <input class="form-control example-date-input" name="current_stock_qty"
                                             type="text" id="current_stock_qty" readonly style="background-color:#ddd">
                                     </div>
@@ -53,33 +56,40 @@
                                     <div class="md-3">
                                         <label for="example-text-input" class="form-label" style="margin-top:43px;">
                                         </label>
-                                        <i class="btn btn-secondary btn-rounded waves-effect waves-light fas fa-plus-circle addeventmore">
-                                           Thêm</i>
+                                        <i
+                                            class="btn btn-secondary btn-rounded waves-effect waves-light fas fa-plus-circle addeventmore">
+                                           Thêm sản phẩm</i>
                                     </div>
                                 </div>
                             </div> <!-- // end row  -->
                         </div> <!-- End card-body -->
                         <!--  ---------------------------------- -->
                         <div class="card-body">
-                            <form method="post" action="{{ route('purchase.store') }}">
+                            <form method="post" action="{{ route('invoice.store') }}">
                                 @csrf
                                 <table class="table-sm table-bordered" width="100%" style="border-color: #ddd;">
                                     <thead>
                                         <tr>
                                             <th>Danh mục</th>
                                             <th>Tên sản phẩm</th>
-                                            <th>Chiếc/KG</th>
-                                            <th with=7%>Đơn giá</th>
-                                            <th with=10%>Mô tả</th>
-                                            <th with=15%>Tổng</th>
-                                            <th with=7%>Action</th>
+                                            <th width="7%">Cái/Kg</th>
+                                            <th width="10%">Đơn giá</th>
+                                            <th width="15%">Tổng giá</th>
+                                            <th width="7%">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="addRow" class="addRow">
                                     </tbody>
                                     <tbody>
                                         <tr>
-                                            <td colspan="4"> Grand Total</td>
+                                            <td colspan="4"> Chiết khấu</td>
+                                            <td>
+                                                <input type="number" name="discount_amount" id="discount_amount"
+                                                    class="form-control estimated_amount" placeholder="Chiết khấu">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">Thành tiền</td>
                                             <td>
                                                 <input type="text" name="estimated_amount" value="0"
                                                     id="estimated_amount" class="form-control estimated_amount" readonly
@@ -91,11 +101,52 @@
                                 </table><br>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <textarea name="description" class="form-control" id="description" placeholder="Write Description Here"></textarea>
+                                        <textarea name="description" class="form-control" id="description" placeholder="Ghi chú"></textarea>
                                     </div>
                                 </div><br>
+                                <div class="row">
+                                    <div class="form-group col-md-3">
+                                        <label> Cách thanh toán </label>
+                                        <select name="paid_status" id="paid_status" class="form-select">
+                                            <option value="" disabled selected hidden >Chọn phương thức thanh toán</option>
+                                            <option value="full_paid">Trả Đầy Đủ </option>
+                                            <option value="full_due">Trả Một Phần</option>
+                                            <option value="partial_paid">Trả Một Phần</option>
+                                        </select>
+                                        <input type="text" name="paid_amount" class="form-control paid_amount"
+                                            placeholder="Nhập số tiền đã thanh toán" style="display:none;">
+                                    </div>
+                                    <div class="form-group col-md-9">
+                                        <label> Tên khách hàng </label>
+                                        <select name="customer_id" id="customer_id" class="form-select">
+                                            <option value="" disabled selected hidden>Chọn khách hàng</option>
+                                            @foreach ($costomer as $cust)
+                                                <option value="{{ $cust->id }}">{{ $cust->name }} -
+                                                    {{ $cust->mobile_no }}</option>
+                                            @endforeach
+                                            <option value="0">Khách hàng mới</option>
+                                        </select>
+                                    </div>
+                                </div> <!-- // end row --> <br>
+                                <!-- Hide Add Customer Form -->
+                                <div class="row new_customer" style="display:none">
+                                    <div class="form-group col-md-4">
+                                        <input type="text" name="name" id="name" class="form-control"
+                                            placeholder="Nhập tên khách hàng">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <input type="text" name="mobile_no" id="mobile_no" class="form-control"
+                                            placeholder="Nhập số điện thoại khách hàng">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <input type="email" name="email" id="email" class="form-control"
+                                            placeholder="Nhập email khách hàng">
+                                    </div>
+                                </div>
+                                <!-- End Hide Add Customer Form -->
+                                <br>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-info" id="storeButton"> Invoice Store</button>
+                                    <button type="submit" class="btn btn-info" id="storeButton">Tạo hóa đơn</button>
                                 </div>
                             </form>
                         </div> <!-- End card-body -->
@@ -106,10 +157,8 @@
     </div>
     <script id="document-template" type="text/x-handlebars-template">
 <tr class="delete_add_more_item" id="delete_add_more_item">
-        <input type="hidden" name="purchase_no[]" value="@{{purchase_no}}">
         <input type="hidden" name="date" value="@{{date}}">
         <input type="hidden" name="invoice_no" value="@{{invoice_no}}">
-
     <td>
         <input type="hidden" name="category_id[]" value="@{{category_id}}">
         @{{ category_name }}
@@ -121,68 +170,48 @@
     </td>
 
      <td>
-        <input type="number" min="1" class="form-control buying_qty text-right" name="buying_qty[]" value=""> 
+        <input type="number" min="1" class="form-control selling_qty text-right" name="selling_qty[]" value=""> 
     </td>
 
     <td>
         <input type="number" class="form-control unit_price text-right" name="unit_price[]" value=""> 
     </td>
-
-    <td>
-        <input type="text" class="form-control" name="description[]"> 
-    </td>
-
      <td>
-        <input type="number" class="form-control buying_price text-right" name="buying_price[]" value="0" readonly> 
+        <input type="number" class="form-control selling_price text-right" name="selling_price[]" value="0" readonly> 
     </td>
 
      <td>
         <i class="btn btn-danger btn-sm fas fa-window-close removeeventmore"></i>
     </td>
 
-</tr>
+    </tr>
 
 </script>
     <script type="text/javascript">
         $(document).ready(function() {
             $(document).on("click", ".addeventmore", function() {
                 var date = $('#date').val();
-                var purchase_no = $('#purchase_no').val();
-                var supplier_id = $('#supplier_id').val();
+                var invoice_no = $('#invoice_no').val();
                 var category_id = $('#category_id').val();
                 var category_name = $('#category_id').find('option:selected').text();
                 var product_id = $('#product_id').val();
                 var product_name = $('#product_id').find('option:selected').text();
                 if (date == '') {
-                    $.notify("Vui lòng chọn ngày", {
+                    $.notify("Vui lòng nhập ngày", {
                         globalPosition: 'top right',
                         className: 'error'
                     });
                     return false;
                 }
-                if (purchase_no == '') {
-                    $.notify("Đơn hàng là bắt buộc", {
+                if (category_name == "Chọn danh mục") {
+                    $.notify("Vui lòng chọn danh mục", {
                         globalPosition: 'top right',
                         className: 'error'
                     });
                     return false;
                 }
-                if (supplier_id == '') {
-                    $.notify("Supplier is Required", {
-                        globalPosition: 'top right',
-                        className: 'error'
-                    });
-                    return false;
-                }
-                if (category_id == '') {
-                    $.notify("Category is Required", {
-                        globalPosition: 'top right',
-                        className: 'error'
-                    });
-                    return false;
-                }
-                if (product_id == '') {
-                    $.notify("Product Field is Required", {
+                if (product_name == 'Chọn sản phẩm') {
+                    $.notify("Sản phẩm không được để trống", {
                         globalPosition: 'top right',
                         className: 'error'
                     });
@@ -192,8 +221,7 @@
                 var tamplate = Handlebars.compile(source);
                 var data = {
                     date: date,
-                    purchase_no: purchase_no,
-                    supplier_id: supplier_id,
+                    invoice_no: invoice_no,
                     category_id: category_id,
                     category_name: category_name,
                     product_id: product_id,
@@ -206,22 +234,29 @@
                 $(this).closest(".delete_add_more_item").remove();
                 totalAmountPrice();
             });
-            $(document).on('keyup click', '.unit_price,.buying_qty', function() {
+            $(document).on('keyup click', '.unit_price,.selling_qty', function() {
                 var unit_price = $(this).closest("tr").find("input.unit_price").val();
-                var qty = $(this).closest("tr").find("input.buying_qty").val();
+                var qty = $(this).closest("tr").find("input.selling_qty").val();
                 var total = unit_price * qty;
-                $(this).closest("tr").find("input.buying_price").val(total);
+                $(this).closest("tr").find("input.selling_price").val(total);
+                $('#discount_amount').trigger('keyup');
+            });
+            $(document).on('keyup', '#discount_amount', function() {
                 totalAmountPrice();
             });
             // Calculate sum of amout in invoice 
             function totalAmountPrice() {
                 var sum = 0;
-                $(".buying_price").each(function() {
+                $(".selling_price").each(function() {
                     var value = $(this).val();
                     if (!isNaN(value) && value.length != 0) {
                         sum += parseFloat(value);
                     }
                 });
+                var discount_amount = parseFloat($('#discount_amount').val());
+                if (!isNaN(discount_amount) && discount_amount.length != 0) {
+                    sum -= parseFloat(discount_amount);
+                }
                 $('#estimated_amount').val(sum);
             }
         });
@@ -237,7 +272,7 @@
                         category_id: category_id
                     },
                     success: function(data) {
-                        var html = '<option value="">Select Category</option>';
+                        var html = '<option value="" disabled selected hidden>Chọn sản phẩm</option>';
                         $.each(data, function(key, v) {
                             html += '<option value=" ' + v.id + ' "> ' + v.name +
                                 '</option>';
@@ -248,19 +283,39 @@
             });
         });
     </script>
-     <script type="text/javascript">
-        $(function(){
-            $(document).on('change','#product_id',function(){
+    <script type="text/javascript">
+        $(function() {
+            $(document).on('change', '#product_id', function() {
                 var product_id = $(this).val();
                 $.ajax({
-                    url:"{{ route('check-product-stock') }}",
+                    url: "{{ route('check-product-stock') }}",
                     type: "GET",
-                    data:{product_id:product_id},
-                    success:function(data){                   
+                    data: {
+                        product_id: product_id
+                    },
+                    success: function(data) {
                         $('#current_stock_qty').val(data);
                     }
                 });
             });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).on('change', '#paid_status', function() {
+            var paid_status = $(this).val();
+            if (paid_status == 'partial_paid') {
+                $('.paid_amount').show();
+            } else {
+                $('.paid_amount').hide();
+            }
+        });
+        $(document).on('change', '#customer_id', function() {
+            var customer_id = $(this).val();
+            if (customer_id == '0') {
+                $('.new_customer').show();
+            } else {
+                $('.new_customer').hide();
+            }
         });
     </script>
 @endsection

@@ -69,13 +69,15 @@
                             </li>
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="ri-mail-send-line"></i>
-                                    <span>Manage Invoice</span>
+                                    <i class="ri-compass-2-fill"></i>
+                                    <span>Quản lý hóa đơn</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ route('invoice.all') }}">All Invoice</a></li>
-                                    <li><a href=" ">Approval Invoice</a></li>
-                    
+                                    <li><a href="{{ route('invoice.all') }}">Danh sách hóa đơn</a></li>
+                                    <li><a href="{{ route('invoice.pending.list') }}">Phê duyệt hóa đơn</a></li>
+                                    <li><a href="{{ route('print.invoice.list') }}">In hóa đơn</a></li>
+                                      <li><a href="{{ route('daily.invoice.report') }}">Báo cáo hóa đơn theo ngày</a></li>
+                                   
                                 </ul>
                             </li>
                             <li class="menu-title">Pages</li>
