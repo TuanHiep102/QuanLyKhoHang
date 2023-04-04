@@ -35,15 +35,7 @@
                                     @foreach ($allData as $key => $item)
                                         <tr>
                                             <td> {{ $key + 1 }} </td>
-                                            
-                                            <td>
-                                                @if ($item['payment']['customer']['name'] == null)
-                                                    noname
-                                                @else
-                                                    {{ $item['payment']['customer']['name'] }}
-                                                @endif
-                                            </td> 
-                                            
+                                            <td> {{ $item['payment']['customer']['name'] }} </td> 
                                             <td> #{{ $item->invoice_no }} </td>
                                             <td> {{ date('d-m-Y', strtotime($item->date)) }} </td>
                                             <td> {{ $item->description }} </td>
