@@ -21,7 +21,7 @@ class InvoiceController extends Controller
         $allData = Invoice::orderBy('date', 'desc')
             ->orderBy('id', 'desc')
             ->where('status', '1')
-            ->get();
+            ->simplePaginate(5);
         return view('backend.invoice.invoice_all', compact('allData'));
     } // End Method
 

@@ -70,7 +70,6 @@
                                                 <select name="product_id" id="product_id" class="form-select select2"
                                                     aria-label="Default select example">
                                                     <option selected="">Chọn sản phẩm</option>
-
                                                 </select>
                                             </div>
                                         </div>

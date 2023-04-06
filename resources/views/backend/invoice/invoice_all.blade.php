@@ -42,10 +42,13 @@
                                                     title="Delete Data" id="delete"> <i class="fas fa-trash-alt"></i>
                                                 </a>
                                             </td> --}}
-                                        </tr>
+                                        </tr>   
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div style="align-content:">
+                                {{ $allData->links(); }}
+                            </div>
                         </div>
                     </div>
                 </div> <!-- end col -->
