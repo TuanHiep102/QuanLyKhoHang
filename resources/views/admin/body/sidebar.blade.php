@@ -77,7 +77,6 @@
                                     <li><a href="{{ route('invoice.pending.list') }}">Phê duyệt hóa đơn</a></li>
                                     <li><a href="{{ route('print.invoice.list') }}">In hóa đơn</a></li>
                                       <li><a href="{{ route('daily.invoice.report') }}">Báo cáo hóa đơn theo ngày</a></li>
-                                   
                                 </ul>
                             </li>
                             <li class="menu-title">Pages</li>
@@ -89,20 +88,6 @@
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{ route('stock.report') }}">Báo cáo tồn kho</a></li>
                                     <li><a href="{{ route('stock.supplier.wise') }}">Nhà cung cấp / Lợi nhuận sản phẩm</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="ri-profile-line"></i>
-                                    <span>Utility</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="pages-starter.html">Starter Page</a></li>
-                                    <li><a href="pages-timeline.html">Timeline</a></li>
-                                    <li><a href="pages-directory.html">Directory</a></li>
-                                    <li><a href="pages-invoice.html">Invoice</a></li>
-                                    <li><a href="pages-404.html">Error 404</a></li>
-                                    <li><a href="pages-500.html">Error 500</a></li>
                                 </ul>
                             </li>
                         </ul>

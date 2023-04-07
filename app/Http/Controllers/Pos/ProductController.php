@@ -34,7 +34,7 @@ class ProductController extends Controller
             'supplier_id' => $request->supplier_id,
             'unit_id' => $request->unit_id,
             'category_id' => $request->category_id,
-            'quantity' => '0',
+            'quantity' => $request->quantity,
             'created_by' => Auth::user()->id,
             'created_at' => Carbon::now(),
         ]);
@@ -64,6 +64,7 @@ class ProductController extends Controller
             'supplier_id' => $request->supplier_id,
             'unit_id' => $request->unit_id,
             'category_id' => $request->category_id,
+            'quantity'=> $request->quantity,
             'updated_by' => Auth::user()->id,
             'updated_at' => Carbon::now(),
         ]);
